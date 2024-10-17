@@ -1,0 +1,601 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+/*	overflow: hidden;  Prevent scrolling until loading is done */
+	font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
+}
+
+body::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 1); /* Semi-transparent black background */
+	z-index: -1;
+}
+
+/* Styling for the loading screen */
+#loading-screen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #363636; /*Black background for the loading screen */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    z-index: 1000; /* Make sure it's on top */
+}
+
+/* Hidden state for the content (before loading completes) */
+.hidden {
+    display: none;
+}
+
+/* Once the loading is complete, fade in the content */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 2s forwards; /* Animate opacity from 0 to 1 */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.socket {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  margin-left: -100px;
+  top: 50%;
+  margin-top: -100px;
+}
+
+.hex-brick {
+  background: #880023;
+  width: 30px;
+  height: 17px;
+  position: absolute;
+  top: 5px;
+  animation-name: fade00;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: fade00;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+}
+
+.h2 {
+	-webkit-transform: rotate(60deg);
+	transform: rotate(60deg);
+}
+
+.h3 {
+	-webkit-transform: rotate(-60deg);
+	transform: rotate(-60deg);
+}
+
+.gel {
+  height: 30px;
+  width: 30px;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.center-gel {
+  margin-left: -15px;
+  margin-top: -15px;
+  animation-name: pulse00;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: pulse00;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+}
+
+.c1 {
+  margin-left: -47px;
+  margin-top: -15px;
+}
+
+.c2 {
+  margin-left: -31px;
+  margin-top: -43px;
+}
+
+.c3 {
+  margin-left: 1px;
+  margin-top: -43px;
+}
+
+.c4 {
+  margin-left: 17px;
+  margin-top: -15px;
+}
+
+.c5 {
+  margin-left: -31px;
+  margin-top: 13px;
+}
+
+.c6 {
+  margin-left: 1px;
+  margin-top: 13px;
+}
+
+.c7 {
+  margin-left: -63px;
+  margin-top: -43px;
+}
+
+.c8 {
+  margin-left: 33px;
+  margin-top: -43px;
+}
+
+.c9 {
+  margin-left: -15px;
+  margin-top: 41px;
+}
+
+.c10 {
+  margin-left: -63px;
+  margin-top: 13px;
+}
+
+.c11 {
+  margin-left: 33px;
+  margin-top: 13px;
+}
+
+.c12 {
+  margin-left: -15px;
+  margin-top: -71px;
+}
+
+.c13 {
+  margin-left: -47px;
+  margin-top: -71px;
+}
+
+.c14 {
+  margin-left: 17px;
+  margin-top: -71px;
+}
+
+.c15 {
+  margin-left: -47px;
+  margin-top: 41px;
+}
+
+.c16 {
+  margin-left: 17px;
+  margin-top: 41px;
+}
+
+.c17 {
+  margin-left: -79px;
+  margin-top: -15px;
+}
+
+.c18 {
+  margin-left: 49px;
+  margin-top: -15px;
+}
+
+.c19 {
+  margin-left: -63px;
+  margin-top: -99px;
+}
+
+.c20 {
+  margin-left: 33px;
+  margin-top: -99px;
+}
+
+.c21 {
+  margin-left: 1px;
+  margin-top: -99px;
+}
+
+.c22 {
+  margin-left: -31px;
+  margin-top: -99px;
+}
+
+.c23 {
+  margin-left: -63px;
+  margin-top: 69px;
+}
+
+.c24 {
+  margin-left: 33px;
+  margin-top: 69px;
+}
+
+.c25 {
+  margin-left: 1px;
+  margin-top: 69px;
+}
+
+.c26 {
+  margin-left: -31px;
+  margin-top: 69px;
+}
+
+.c27 {
+  margin-left: -79px;
+  margin-top: -15px;
+}
+
+.c28 {
+  margin-left: -95px;
+  margin-top: -43px;
+}
+
+.c29 {
+  margin-left: -95px;
+  margin-top: 13px;
+}
+
+.c30 {
+  margin-left: 49px;
+  margin-top: 41px;
+}
+
+.c31 {
+  margin-left: -79px;
+  margin-top: -71px;
+}
+
+.c32 {
+  margin-left: -111px;
+  margin-top: -15px;
+}
+
+.c33 {
+  margin-left: 65px;
+  margin-top: -43px;
+}
+
+.c34 {
+  margin-left: 65px;
+  margin-top: 13px;
+}
+
+.c35 {
+  margin-left: -79px;
+  margin-top: 41px;
+}
+
+.c36 {
+  margin-left: 49px;
+  margin-top: -71px;
+}
+
+.c37 {
+  margin-left: 81px;
+  margin-top: -15px;
+}
+
+.r1 {
+  animation-name: pulse00;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-delay: 0.2s;
+  -webkit-animation-name: pulse00;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-delay: 0.2s;
+}
+
+.r2 {
+  animation-name: pulse00;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-delay: 0.4s;
+  -webkit-animation-name: pulse00;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-delay: 0.4s;
+}
+
+.r3 {
+  animation-name: pulse00;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-delay: 0.6s;
+  -webkit-animation-name: pulse00;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-delay: 0.6s;
+}
+
+.r1 > .hex-brick {
+  animation-name: fade00;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-delay: 0.2s;
+  -webkit-animation-name: fade00;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-delay: 0.2s;
+}
+
+.r2 > .hex-brick {
+  animation-name: fade00;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-delay: 0.4s;
+  -webkit-animation-name: fade00;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-delay: 0.4s;
+}
+
+.r3 > .hex-brick {
+  animation-name: fade00;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-delay: 0.6s;
+  -webkit-animation-name: fade00;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-delay: 0.6s;
+}
+
+@keyframes pulse00 {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(0.01);
+    transform: scale(0.01);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes fade00 {
+  0% {
+    background: #880023;
+  }
+
+  50% {
+    background: #882e15;
+  }
+
+  100% {
+    background: #880023;
+  }
+}
+
+
+/*
+.background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url("Images/pexels-eric-santoyo-739410.jpg");
+	background-size: cover;
+	z-index: -1;
+	opacity: 0.4; 
+}
+*/
+
+.background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color:#1f1f1f;
+	z-index: -1;
+}
+
+nav {
+	background-color:#880023;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.logo {
+	padding: 1vw 1vw 1.5vw;
+}
+
+.nav-links {
+	display: flex;
+	justify-content: space-around;
+	width: 50%;
+}
+
+.nav-links li {
+	list-style: none;
+	padding: 1vw;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.nav-links a {
+	text-align: center;
+	text-decoration: none;
+	color:#FFFFFF;
+	font-size: 2.7vh;
+}
+
+a:hover {
+	color: white;
+}
+
+.dropdown {
+	position: relative;
+	margin-right: 30px;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #333;
+	min-width: 2vw;
+	z-index: 1;
+	top: 100%; /* Position the dropdown below the button */
+	right: 0; /* Align the dropdown with the right edge of the button */
+}
+
+.dropdown-content a {
+	color: #fff;
+	padding: 1.2vw 2vw;
+	display: block;
+	text-decoration: none;
+}
+
+.dropdown-content a:hover {
+	background-color: red;
+}
+
+.dropbtn {
+	display: none;
+	background-color: #333;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+.dropbtn:hover {
+	color: red;
+}
+
+@media screen and (max-width: 1300px) {
+
+.nav-links {
+	display: none;
+}
+
+.dropdown {
+	display: block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	min-width: 12vw;
+}
+
+.dropdown:hover .dropdown-content {
+	display:block;
+}
+
+.dropbtn {
+	display: block;
+	border-radius: 5px;
+	min-width: 30px;
+	min-height: 30px;
+	font-size: 18px;
+}
+}
+
+div.introduction {
+	display: flex;
+	align-items: flex-start; /* Align items to the top */
+	flex-wrap: wrap; /* Allows wrapping on smaller screens */
+	gap: 1vw; /* Optional: adds spacing between elements */
+	margin-top: 15px;
+}
+
+img.picture {
+	flex: 1; /* Make the image take up its fair share of space */
+	max-width: 29vw; /* Max width as a percentage of the viewport */
+	width: 100%; /* Ensures it scales down */
+	height: auto; /* Maintain aspect ratio */
+	margin-left: 1vw;
+	border-radius: 20px;
+}
+
+#drone-photography{
+	align-items: center;
+}
+
+#drone-photo-picture{
+	border-radius: 10px;
+	max-width: 25%;
+}
+
+.intro-text {
+	flex: 2; /* Make text take up more space than the image */
+	color: white;
+	font-size: calc(12px + 0.5vw); /* Responsive font size */
+	max-width: 67vw;
+	margin: 0 10px 0 0; /* Reset margin */
+	background-color: #4a4a4a;
+	border-radius: 20px;
+    justify-content: center; /* Centers text horizontally */
+    align-items: center;     /* Centers text vertically */
+    padding: 1.3%; /* Add padding if needed to prevent text from touching the edges */
+}
+
+h1.DP-title-1{
+	text-align: center;
+}
+
+#DP-text{
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+	font-size: calc(13px + 0.5vw)
+}
+
+div.DP-Body-Text{
+	flex: 2; /* Make text take up more space than the image */
+	color: white;
+	font-size: calc(14px + 0.5vw); /* Responsive font size */
+	max-width: 100%;
+	margin: 10px; /* Reset margin */
+	background-color: #4a4a4a;
+	border-radius: 20px;
+    padding: 1.3%; /* Add padding if needed to prevent text from touching the edges */
+}
+
+.DP-title-2{
+	text-align: center;
+}
+
+ul.DP-Benefits{
+	list-style-type: square;
+}
+
+/* Media query for screens 450px or smaller */
+@media (max-width: 450px) {
+	div.introduction {
+		flex-direction: column; /* Stack items vertically */
+		align-items: center; /* Center items */
+		padding: 10px; /* Add some padding around the container */
+	}
+
+	img.picture {
+		max-width: 80%; /* Make the image smaller */
+		margin-bottom: 10px; /* Add some space between the image and text */
+	}
+
+	p.intro-text {
+		max-width: 90%; /* Add some padding to the text */
+		font-size: calc(10px + 1vw); /* Adjust font size for smaller screens */
+		text-align: center; /* Center text */
+	}
+
+}
