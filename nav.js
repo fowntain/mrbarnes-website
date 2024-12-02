@@ -34,6 +34,7 @@ const presetHTML = `
 	</div>
 	
 	</nav>
+
 `;
 
 // Function to insert the preset HTML

@@ -579,6 +579,22 @@ ul.DP-Benefits{
 	list-style-type: square;
 }
 
+.textcontent{
+  font-family: 'Lato';
+  width:75%;
+  margin:auto;
+  padding:40px 0px;
+  color:white;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+  width: 75%;
+}
+
 /* Media query for screens 450px or smaller */
 @media (max-width: 450px) {
 	div.introduction {
